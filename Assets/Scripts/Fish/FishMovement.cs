@@ -4,17 +4,18 @@ public class FishMovement : MonoBehaviour
 {
     [SerializeField] private float m_fishSpeed;
     [SerializeField] private Vector3 m_fishPoolLocation;
+    private Vector3 m_fishMovementDirection;
     bool m_isActive = false;
 
     private void Awake()
     {
         //subscribe to events
-        transform.parent.GetComponent<FishDetectCatch>().OnFishCaught += HandleOnFishCaught;
+        transform.GetComponent<FishDetectCatch>().OnFishCaught += HandleOnFishCaught;
     }
 
     private void Update()
     {
-        //if active, move in direction of travel
+        transform.position += m_fishMovementDirection * m_fishSpeed * Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -25,24 +26,31 @@ public class FishMovement : MonoBehaviour
         }
     }
 
-    private void HandleSpawn(Vector2 spawnPoint, Vector2 directionOfTravel)
+    public void HandleOnFishSpawn(Vector3 spawnPoint, Vector3 directionOfTravel)
     {
-        //move to given spawn (fish spawn that spawned the fish)
-        //activate fish
-        //start moving in given direction
+        Debug.Log("Spawn");
+        m_fishMovementDirection = directionOfTravel;
+        transform.position = spawnPoint;
+        m_isActive = true;
     }
 
     private void HandleDespawn()
     {
-        //stop moving
-        //deactivate fish
-        //move to pool
+        Debug.Log("Despawn");
+        m_fishMovementDirection = new Vector3(0, 0, 0);
+        transform.position = m_fishPoolLocation;
+        m_isActive = false;
     }
 
-    private void HandleOnFishCaught()
+    public void HandleOnFishCaught()
     {
         //deactivate fish
         //start catch sequence
+    }
+
+    public bool IsFishActive()
+    {
+        return m_isActive;
     }
 
     private void OnDestroy()
@@ -50,4 +58,5 @@ public class FishMovement : MonoBehaviour
         //unsubscribe to events
         transform.parent.GetComponent<FishDetectCatch>().OnFishCaught -= HandleOnFishCaught;
     }
+
 }

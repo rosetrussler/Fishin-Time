@@ -12,6 +12,7 @@ public class FishDetectCatch : MonoBehaviour
         {
             //be caught
             Debug.Log("fish caught");
+            OnFishCaught?.Invoke();
         }
     }
 
