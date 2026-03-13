@@ -11,7 +11,7 @@ public class SequenceClick : MonoBehaviour
         m_buttonClicked = false;
     }
 
-    IEnumerator StartNote(float time)
+    public IEnumerator StartNote(float time)
     {
         m_buttonClicked = false;
         float score = 0.0f;

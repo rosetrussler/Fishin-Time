@@ -3,10 +3,15 @@ using System;
 
 public class FishDetectCatch : MonoBehaviour
 {
-    [SerializeField] private string m_sequenceName;
+    public enum SequenceType
+    {
+        parent, 
+    }
+
+    [SerializeField] private SequenceType m_fishSequence;
 
     public event Action OnFishCaught;
-    public event Action<string> OnStartSequence;
+    public event Action<SequenceType> OnStartSequence;
 
     private void Awake()
     {
@@ -21,7 +26,7 @@ public class FishDetectCatch : MonoBehaviour
         {
             //be caught
             Debug.Log("fish caught");
-            OnStartSequence?.Invoke(m_sequenceName);
+            OnStartSequence?.Invoke(m_fishSequence);
             OnFishCaught?.Invoke();
         }
     }
