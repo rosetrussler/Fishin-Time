@@ -82,7 +82,7 @@ public class SequenceManager : MonoBehaviour
             {
                 try
                 {
-                    sequenceList[i].GetComponent<SequenceClick>().StartNote(m_noteTime);
+                    score = sequenceList[i].GetComponent<SequenceClick>().PublicStartNote(m_noteTime);
                 }
                 catch (Exception e)
                 {
