@@ -58,7 +58,6 @@ public class BobberState : MonoBehaviour
         {
             m_bobberState = BobberStateMachine.outOfWater;
             m_playerInput.actions.FindAction("Move").Disable();
-            m_playerInput.actions.FindAction("ClickOnce").Disable();
             m_playerInput.actions.FindAction("Cast").Enable();
         }
     }
@@ -78,7 +77,6 @@ public class BobberState : MonoBehaviour
     {
         m_bobberState = BobberStateMachine.inWater;
         m_playerInput.actions.FindAction("Cast").Disable();
-        m_playerInput.actions.FindAction("ClickOnce").Disable();
         m_playerInput.actions.FindAction("Move").Enable();
     }
 
@@ -86,7 +84,6 @@ public class BobberState : MonoBehaviour
     {
         m_bobberState = BobberStateMachine.reeling;
         m_playerInput.actions.FindAction("Move").Disable();
-        m_playerInput.actions.FindAction("ClickOnce").Enable();
         OnStopMovement?.Invoke();
     }
 

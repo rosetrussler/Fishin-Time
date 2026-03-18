@@ -70,7 +70,7 @@ public class SequenceManager : MonoBehaviour
         {
             if (sequenceList[i] != null)
             {
-                sequenceList[i].transform.position = sequenceLocations[i];
+                sequenceList[i].GetComponent<RectTransform>().position = sequenceLocations[i];
             }
         }
 

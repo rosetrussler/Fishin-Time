@@ -25,7 +25,7 @@ public class SequenceClick : MonoBehaviour
     }
 
     private IEnumerator StartNote(float time)
-    {
+    {                                               //make note indicator
         m_buttonClicked = false;
         float m_score = 0.0f;
         float runtime = time;
