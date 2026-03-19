@@ -541,6 +541,7 @@ GameObject:
   m_Component:
   - component: {fileID: 418833433}
   - component: {fileID: 418833434}
+  - component: {fileID: 418833435}
   m_Layer: 0
   m_Name: CatchSequenceManager
   m_TagString: Untagged
@@ -588,6 +589,18 @@ MonoBehaviour:
   - {x: 200, y: 200}
   - {x: 0, y: 0}
   - {x: 400, y: 300}
+--- !u!114 &418833435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418833432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3759ce9cb1805db4780d1c331d57c262, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &468156337
 GameObject:
   m_ObjectHideFlags: 0
@@ -4428,22 +4441,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 1fc7dccc-d913-4401-8fae-fa39a592cfc4
     m_ActionName: 'Player/Move[/Mouse/delta/up,/Mouse/delta/down,/Mouse/delta/left,/Mouse/delta/right]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1505704523}
-        m_TargetAssemblyTypeName: BobberMovement, Assembly-CSharp
-        m_MethodName: HandleClickOnce
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 17ab4728-cfff-4572-9a59-3c5fc098081b
-    m_ActionName: 'Player/ClickOnce[/Mouse/leftButton]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1505704523}

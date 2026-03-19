@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using static FishDetectCatch;
 
+[RequireComponent(typeof(ScoreManager))]
 public class SequenceManager : MonoBehaviour
 {
     enum NoteType
@@ -26,7 +28,8 @@ public class SequenceManager : MonoBehaviour
     [SerializeField] private NoteType[] m_parentSequence;
     [SerializeField] private Vector2[] m_parentSequenceNotePositions;
 
-
+    //events
+    public event Action<float> OnStartNewSequence;
 
 
     private void Start()
@@ -74,7 +77,9 @@ public class SequenceManager : MonoBehaviour
             }
         }
 
-        float score = 0.0f;
+        //tell score manager to start new sequence with current fish difficulty
+        OnStartNewSequence?.Invoke(0.0f);   //TO DO: pass in actual fish difficulty
+
         //start sequence 
         for (int i = 0; i < sequenceLength; i++)
         {
@@ -82,7 +87,8 @@ public class SequenceManager : MonoBehaviour
             {
                 try
                 {
-                    score = sequenceList[i].GetComponent<SequenceClick>().PublicStartNote(m_noteTime);
+                   sequenceList[i].GetComponent<SequenceClick>().PublicStartNote(m_noteTime);
+                    //TO DO IMPORTANT: make timer so each note executes before the next
                 }
                 catch (Exception e)
                 {
@@ -155,5 +161,4 @@ public class SequenceManager : MonoBehaviour
             return indexToReturn;
         }
     }
-
 }
