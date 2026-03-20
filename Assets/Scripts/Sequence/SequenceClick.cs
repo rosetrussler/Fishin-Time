@@ -11,11 +11,17 @@ public class SequenceClick : MonoBehaviour
     private GameObject m_self;
 
     public event Action<float> OnScoreChanger;
+    private event Action<float, float> OnNoteUpdate;
+    private event Action OnNoteChange;
 
     private void Awake()
     {
         //bind events 
         OnScoreChanger += FindFirstObjectByType<ScoreManager>().ScoreChangeHandler;
+        ClickHighlightScale m_clickHighlightScale = this.GetComponentInChildren<ClickHighlightScale>();
+        OnNoteUpdate += m_clickHighlightScale.NoteUpdateHandler;
+        OnNoteChange += m_clickHighlightScale.NewNoteHandler;
+
     }
 
     private void Start()
@@ -59,6 +65,7 @@ public class SequenceClick : MonoBehaviour
                 break;
             }
             time-= Time.deltaTime;
+            OnNoteUpdate?.Invoke(time, runtime);
             yield return new WaitForEndOfFrame();   //make sure that everything runs in time
         }
         m_self.SetActive(false);
@@ -70,5 +77,10 @@ public class SequenceClick : MonoBehaviour
     public void HandleOnButtonClicked()
     {
         m_buttonClicked = true;
+    }
+
+    public void NewNote()
+    {
+
     }
 }

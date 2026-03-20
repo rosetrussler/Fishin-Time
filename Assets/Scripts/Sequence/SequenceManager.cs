@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using UnityEngine;
 using static FishDetectCatch;
+using System.Threading;
+using System.Threading.Tasks;
 
 [RequireComponent(typeof(ScoreManager))]
 public class SequenceManager : MonoBehaviour
@@ -62,7 +64,7 @@ public class SequenceManager : MonoBehaviour
         }
     }
 
-    private void PlaySequence(NoteType[] sequence, Vector2[] sequenceLocations)
+    private async Task PlaySequence(NoteType[] sequence, Vector2[] sequenceLocations)
     {
         //count how many of each note type there are in the sequence, and spawn from pool accordingly
         GameObject[] sequenceList = MakeSequenceList(sequence);
@@ -74,6 +76,7 @@ public class SequenceManager : MonoBehaviour
             if (sequenceList[i] != null)
             {
                 sequenceList[i].GetComponent<RectTransform>().position = sequenceLocations[i];
+                sequenceList[i].GetComponent<SequenceClick>().NewNote();
             }
         }
 
@@ -87,9 +90,7 @@ public class SequenceManager : MonoBehaviour
             {
                 try
                 {
-                   sequenceList[i].GetComponent<SequenceClick>().StartNote(m_noteTime);
-                    //TO DO IMPORTANT: make timer so each note executes before the next
-                    
+                   sequenceList[i].GetComponent<SequenceClick>().StartNote(m_noteTime);                  
                 }
                 catch (Exception e)
                 {
@@ -97,11 +98,10 @@ public class SequenceManager : MonoBehaviour
                 }
 
             }
-            else //assume rest
-            {
+            //assume rest if note isn't in this list 
 
-            }
-
+            //wait correct amount of time before next pass
+            await Task.Delay(m_noteTime * 1000);
         }
 
     }

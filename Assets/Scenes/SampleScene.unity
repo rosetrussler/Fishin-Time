@@ -577,18 +577,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_poolPosition: {x: 20, y: 20}
-  m_noteTime: 3
+  m_noteTime: 1
   m_clickOncePool:
   - {fileID: 1297183934}
   - {fileID: 146019095}
   - {fileID: 1574666904}
   - {fileID: 1666616388}
   - {fileID: 974642336}
-  m_parentSequence: 010000000000000001000000
+  m_parentSequence: 01000000000000000100000001000000
   m_parentSequenceNotePositions:
   - {x: 200, y: 200}
   - {x: 0, y: 0}
   - {x: 400, y: 300}
+  - {x: 500, y: 250}
 --- !u!114 &418833435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4177,6 +4178,14 @@ PrefabInstance:
     - target: {fileID: 2818533251115138851, guid: 7c019765b2edb814fa89447d41bd95a8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8270252118704886509, guid: 7c019765b2edb814fa89447d41bd95a8, type: 3}
+      propertyPath: m_endSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8270252118704886509, guid: 7c019765b2edb814fa89447d41bd95a8, type: 3}
+      propertyPath: m_startSize
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8289574100285354792, guid: 7c019765b2edb814fa89447d41bd95a8, type: 3}
       propertyPath: m_CullTransparentMesh
