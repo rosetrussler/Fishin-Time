@@ -27,9 +27,10 @@ public class ScoreManager : MonoBehaviour
     {
         m_playerScore += playerScore;
         Debug.Log("Player score: " + m_playerScore);
-        if (playerScore >= 1.0f)
+        if (m_playerScore >= 1.0f)
         {
             Debug.Log("FISH CAUGHT");
+            //call fish caught event to reset bobber state
         }
     }
 }

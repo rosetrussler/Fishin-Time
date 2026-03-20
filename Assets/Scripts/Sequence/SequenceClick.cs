@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SequenceClick : MonoBehaviour
 {
@@ -26,13 +27,23 @@ public class SequenceClick : MonoBehaviour
     }
 
 
-    public void PublicStartNote(float time)
+    /// <summary>
+    /// Public function which starts the note's play coroutine
+    /// </summary>
+    /// <param name="time"></param>
+    public void StartNote(float time)
     {
         m_self.SetActive(true);
-        StartCoroutine(StartNote(time));
+        StartCoroutine(PlayNote(time));
     }
 
-    private IEnumerator StartNote(float time)
+
+    /// <summary>
+    /// This function manages the note play sequence and scores the player on the accuracy of their timing, this value is returned from the coroutine via an event
+    /// </summary>
+    /// <param name="time"></param>
+    /// <returns></returns>
+    private IEnumerator PlayNote(float time)
     {                                               //make note indicator
         m_buttonClicked = false;
         m_score = 0.0f;
@@ -42,24 +53,20 @@ public class SequenceClick : MonoBehaviour
             if (m_buttonClicked)
             {
                 Debug.Log("Click button");
-                m_score = 1.0f - time / runtime;
+                m_score = (runtime - time) * (1/runtime);       //score = fraction of time passed
                 OnScoreChanger?.Invoke(m_score);
+                m_self.GetComponent<Image>().enabled = false;
                 break;
             }
             time-= Time.deltaTime;
             yield return new WaitForEndOfFrame();   //make sure that everything runs in time
         }
-        if (time > 0)
-        {
-            yield return new WaitForSecondsRealtime(time);
-        }
-        else
-        {
-            OnScoreChanger?.Invoke(m_score);
-        }
         m_self.SetActive(false);
     }
 
+    /// <summary>
+    /// This tells the script when the button has been clicked
+    /// </summary>
     public void HandleOnButtonClicked()
     {
         m_buttonClicked = true;

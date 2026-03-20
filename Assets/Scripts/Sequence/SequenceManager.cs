@@ -87,8 +87,9 @@ public class SequenceManager : MonoBehaviour
             {
                 try
                 {
-                   sequenceList[i].GetComponent<SequenceClick>().PublicStartNote(m_noteTime);
+                   sequenceList[i].GetComponent<SequenceClick>().StartNote(m_noteTime);
                     //TO DO IMPORTANT: make timer so each note executes before the next
+                    
                 }
                 catch (Exception e)
                 {
@@ -100,6 +101,7 @@ public class SequenceManager : MonoBehaviour
             {
 
             }
+
         }
 
     }
