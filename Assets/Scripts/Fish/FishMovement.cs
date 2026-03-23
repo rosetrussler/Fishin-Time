@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class FishMovement : MonoBehaviour
@@ -44,8 +45,7 @@ public class FishMovement : MonoBehaviour
 
     public void HandleOnFishCaught()
     {
-        //deactivate fish
-        //start catch sequence
+       
     }
 
     public bool IsFishActive()

@@ -28,6 +28,7 @@ public class SequenceClick : MonoBehaviour
     {
         m_self = this.gameObject;
         m_self.SetActive(false);
+        m_self.GetComponent<Image>().enabled = true;
 
         m_buttonClicked = false;
     }
@@ -39,7 +40,9 @@ public class SequenceClick : MonoBehaviour
     /// <param name="time"></param>
     public void StartNote(float time)
     {
+        m_buttonClicked = false;
         m_self.SetActive(true);
+        m_self.GetComponent<Image>().enabled = true;
         StartCoroutine(PlayNote(time));
     }
 

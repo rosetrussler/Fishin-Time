@@ -20,6 +20,10 @@ public class BobberMovement : MonoBehaviour
     private void Awake()
     {
         GetComponent<BobberState>().OnStopMovement += StopMovementHandler;
+        SequenceManager sequenceManager = FindFirstObjectByType<SequenceManager>();
+        sequenceManager.OnReelFish += ReelFishHandler;
+        sequenceManager.OnFishEscape += FishEscapeHandler;
+
     }
 
     private void Update()
@@ -65,7 +69,7 @@ public class BobberMovement : MonoBehaviour
 
     public void HandleClickOnce(InputAction.CallbackContext ctx)
     {
-        //can only do when already cast
+        //can only do when already casts
         if (ctx.performed)
         {
             Debug.Log("ClickOnce performed");
@@ -78,6 +82,17 @@ public class BobberMovement : MonoBehaviour
     private void StopMovementHandler()
     {
         m_moveDirection = Vector3.zero;
+    }
+
+    private void ReelFishHandler()
+    {
+        transform.position = new Vector3(0,-1,0);
+        OnCancelCast?.Invoke();
+    }
+
+    private void FishEscapeHandler()
+    {
+        OnCast?.Invoke();
     }
 
     private void OnDestroy()

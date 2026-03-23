@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -30,7 +31,9 @@ public class SpawnFish : MonoBehaviour
 
         //get number of fish in pool
         m_fishPoolLength = m_fishPool.Length;
-        
+
+        //bind to events 
+        transform.parent.GetChild(1).GetComponent<FishOnSink>().OnFishReachedSink += FishReachedSinkHandler;
     }
 
     private void Start()
@@ -81,5 +84,10 @@ public class SpawnFish : MonoBehaviour
         {
             return UnityEngine.Random.Range(0, m_fishPoolLength - 1);
         }
+    }
+
+    public void FishReachedSinkHandler()
+    {
+        SpawnRandomFish();
     }
 }

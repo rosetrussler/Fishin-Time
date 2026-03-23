@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(SequenceManager))]
@@ -5,6 +6,8 @@ public class ScoreManager : MonoBehaviour
 {
     private float m_playerScore;
     private float m_currentFishDifficulty;  //has to be in range 0 <= x < 1
+
+    public event Action OnFishCaught;
 
     //hold the score of the player 
     //manage random fish score
@@ -31,6 +34,7 @@ public class ScoreManager : MonoBehaviour
         {
             Debug.Log("FISH CAUGHT");
             //call fish caught event to reset bobber state
+            OnFishCaught?.Invoke();
         }
     }
 }

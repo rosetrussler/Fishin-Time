@@ -30,9 +30,18 @@ public class SequenceManager : MonoBehaviour
     [SerializeField] private NoteType[] m_parentSequence;
     [SerializeField] private Vector2[] m_parentSequenceNotePositions;
 
+    private bool m_fishCaught = false;
+
     //events
     public event Action<float> OnStartNewSequence;
+    public event Action OnReelFish;
+    public event Action OnFishEscape;
 
+
+    private void Awake()
+    {
+        FindFirstObjectByType<ScoreManager>().OnFishCaught += FishCaughtHandler;
+    }
 
     private void Start()
     {
@@ -104,6 +113,21 @@ public class SequenceManager : MonoBehaviour
             await Task.Delay(m_noteTime * 1000);
         }
 
+        //if fish has been caught, reel fish if not fish escapes
+        if (m_fishCaught == true)
+        {
+            OnReelFish?.Invoke();
+        }
+        else
+        {
+            OnFishEscape?.Invoke();
+        }
+        //when done reset pool active
+        for (int i = 0; i < m_clickOnceCount - 1; i++)
+        {
+            m_clickOnceActive[i] = false;
+        }
+
     }
 
     /// <summary>
@@ -156,11 +180,16 @@ public class SequenceManager : MonoBehaviour
             m_clickOnceActive[m_clickOncePointerToNext] = true;
             int indexToReturn = m_clickOncePointerToNext;
             m_clickOncePointerToNext = m_clickOncePointerToNext + 1;
-            if (m_clickOncePointerToNext >= m_clickOnceCount)   //if reach end of pool, loop back to start
+            if (m_clickOncePointerToNext >= m_clickOnceCount - 1)   //if reach end of pool, loop back to start
             {
                 m_clickOncePointerToNext = 0;
             }
             return indexToReturn;
         }
+    }
+
+    private void FishCaughtHandler()
+    {
+        m_fishCaught = true;
     }
 }
