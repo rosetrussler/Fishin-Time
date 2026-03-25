@@ -5,13 +5,19 @@ public class FishMovement : MonoBehaviour
 {
     [SerializeField] private float m_fishSpeed;
     [SerializeField] private Vector3 m_fishPoolLocation;
+    private Vector3 m_fishMovementDirectionTempHolder;
     private Vector3 m_fishMovementDirection;
     bool m_isActive = false;
+
+    public event Action OnFishDespawn;
 
     private void Awake()
     {
         //subscribe to events
-        transform.GetComponent<FishDetectCatch>().OnFishCaught += HandleOnFishCaught;
+        FishDetectCatch fishDetectCatch = transform.GetComponent<FishDetectCatch>();
+        fishDetectCatch.OnFishCaught += HandleOnFishCaught;
+        fishDetectCatch.OnReelFish += HandleOnFishReel;
+        fishDetectCatch.OnFishEscape += HandleOnFishRelease;
     }
 
     private void Update()
@@ -41,11 +47,32 @@ public class FishMovement : MonoBehaviour
         m_fishMovementDirection = new Vector3(0, 0, 0);
         transform.position = m_fishPoolLocation;
         m_isActive = false;
+        OnFishDespawn?.Invoke();
     }
 
-    public void HandleOnFishCaught()
+    private void HandleOnFishCaught()
     {
-       
+        PauseMovement();
+    }
+    private void PauseMovement()
+    {
+        m_fishMovementDirectionTempHolder = m_fishMovementDirection;
+        m_fishMovementDirection = Vector3.zero;
+    }
+
+    private void ResumeMovement()
+    {
+        m_fishMovementDirection = m_fishMovementDirectionTempHolder;
+    }
+
+    public void HandleOnFishReel()
+    {
+        Debug.Log("FISH REEL!!!!!");
+        HandleDespawn();
+    }
+    public void HandleOnFishRelease()
+    {
+        ResumeMovement();
     }
 
     public bool IsFishActive()

@@ -59,12 +59,12 @@ public class SequenceManager : MonoBehaviour
     /// Starts the click sequence according to the passed in string
     /// </summary>
     /// <param name="sequenceName"></param>
-    public void HandleOnStartSequence(SequenceType sequenceType)
+    public void HandleOnStartSequence(SequenceType sequenceType, FishDetectCatch fishRef)
     {
         switch(sequenceType)
         {
             case (SequenceType.parent):
-                PlaySequence(m_parentSequence, m_parentSequenceNotePositions);
+                PlaySequence(m_parentSequence, m_parentSequenceNotePositions, fishRef);
                 break;
             default:
                 Debug.Log("[!]ERROR: No valid sequence name passed to manager");
@@ -73,7 +73,7 @@ public class SequenceManager : MonoBehaviour
         }
     }
 
-    private async Task PlaySequence(NoteType[] sequence, Vector2[] sequenceLocations)
+    private async Task PlaySequence(NoteType[] sequence, Vector2[] sequenceLocations, FishDetectCatch fishRef)
     {
         //count how many of each note type there are in the sequence, and spawn from pool accordingly
         GameObject[] sequenceList = MakeSequenceList(sequence);
@@ -116,11 +116,16 @@ public class SequenceManager : MonoBehaviour
         //if fish has been caught, reel fish if not fish escapes
         if (m_fishCaught == true)
         {
+            Debug.Log("SEQUENCE KNOWS FISH WAS CAUGHT!!");
+            OnReelFish += fishRef.ReelFishHandler;
             OnReelFish?.Invoke();
+            OnReelFish -= fishRef.ReelFishHandler;
         }
         else
         {
+            OnFishEscape += fishRef.FishEscapeHandler;
             OnFishEscape?.Invoke();
+            OnFishEscape -= fishRef.FishEscapeHandler;
         }
         //when done reset pool active
         for (int i = 0; i < m_clickOnceCount - 1; i++)
