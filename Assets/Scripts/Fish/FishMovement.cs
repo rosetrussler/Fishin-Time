@@ -41,7 +41,7 @@ public class FishMovement : MonoBehaviour
         m_isActive = true;
     }
 
-    private void HandleDespawn()
+    public void HandleDespawn()
     {
         Debug.Log("Despawn");
         m_fishMovementDirection = new Vector3(0, 0, 0);

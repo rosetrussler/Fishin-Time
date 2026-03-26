@@ -10,7 +10,7 @@ public class FishOnSink : MonoBehaviour
     {
         if (collision.CompareTag("Fish"))
         {
-            OnFishReachedSink?.Invoke();
+            collision.GetComponent<FishMovement>().HandleDespawn();
         }
     }
 }

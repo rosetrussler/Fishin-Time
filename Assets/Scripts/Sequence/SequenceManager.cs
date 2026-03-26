@@ -29,6 +29,9 @@ public class SequenceManager : MonoBehaviour
     [Header("Sequences"), Header("Parent Sequence")]
     [SerializeField] private NoteType[] m_parentSequence;
     [SerializeField] private Vector2[] m_parentSequenceNotePositions;
+    [Header("Sea Bass Sequence")]
+    [SerializeField] private NoteType[] m_seaBassSequence;
+    [SerializeField] private Vector2[] m_seaBassSequenceNotePositions;
 
     private bool m_fishCaught = false;
 
@@ -65,6 +68,9 @@ public class SequenceManager : MonoBehaviour
         {
             case (SequenceType.parent):
                 PlaySequence(m_parentSequence, m_parentSequenceNotePositions, fishRef);
+                break;
+            case (SequenceType.seaBass):
+                PlaySequence(m_seaBassSequence, m_seaBassSequenceNotePositions, fishRef);
                 break;
             default:
                 Debug.Log("[!]ERROR: No valid sequence name passed to manager");

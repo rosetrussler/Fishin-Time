@@ -6,6 +6,7 @@ public class FishDetectCatch : MonoBehaviour
     public enum SequenceType
     {
         parent, 
+        seaBass,
     }
 
     [SerializeField] private SequenceType m_fishSequence;

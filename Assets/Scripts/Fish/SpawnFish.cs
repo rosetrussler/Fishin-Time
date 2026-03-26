@@ -88,7 +88,7 @@ public class SpawnFish : MonoBehaviour
         }
         else
         {
-            return UnityEngine.Random.Range(0, m_fishPoolLength - 1);
+            return UnityEngine.Random.Range(0, m_fishPoolLength);
         }
     }
 
