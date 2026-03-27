@@ -33,7 +33,6 @@ public class SpawnFish : MonoBehaviour
         m_fishPoolLength = m_fishPool.Length;
 
         //bind to events 
-        transform.parent.GetChild(1).GetComponent<FishOnSink>().OnFishReachedSink += FishReachedSinkHandler;
 
         //bind to events for each fish in array
         foreach (var fish in m_fishPool)    //when a fish is despawned spawn a new one

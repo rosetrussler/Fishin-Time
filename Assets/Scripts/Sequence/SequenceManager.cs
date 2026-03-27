@@ -62,15 +62,16 @@ public class SequenceManager : MonoBehaviour
     /// Starts the click sequence according to the passed in string
     /// </summary>
     /// <param name="sequenceName"></param>
-    public void HandleOnStartSequence(SequenceType sequenceType, FishDetectCatch fishRef)
+    public async void HandleOnStartSequence(SequenceType sequenceType, FishDetectCatch fishRef)
     {
         switch(sequenceType)
         {
             case (SequenceType.parent):
-                PlaySequence(m_parentSequence, m_parentSequenceNotePositions, fishRef);
+                await PlaySequence(m_parentSequence, m_parentSequenceNotePositions, fishRef);
                 break;
             case (SequenceType.seaBass):
-                PlaySequence(m_seaBassSequence, m_seaBassSequenceNotePositions, fishRef);
+                await PlaySequence(m_seaBassSequence, m_seaBassSequenceNotePositions, fishRef);
+                Debug.Log("Sea Bass Hooked");
                 break;
             default:
                 Debug.Log("[!]ERROR: No valid sequence name passed to manager");
@@ -81,8 +82,9 @@ public class SequenceManager : MonoBehaviour
 
     private async Task PlaySequence(NoteType[] sequence, Vector2[] sequenceLocations, FishDetectCatch fishRef)
     {
+        int length = sequence.Length;
         //count how many of each note type there are in the sequence, and spawn from pool accordingly
-        GameObject[] sequenceList = MakeSequenceList(sequence);
+        GameObject[] sequenceList = MakeSequenceList(sequence, length);
         int sequenceLength = sequence.Length;
 
         // move notes to correct positions 
@@ -133,11 +135,12 @@ public class SequenceManager : MonoBehaviour
             OnFishEscape?.Invoke();
             OnFishEscape -= fishRef.FishEscapeHandler;
         }
-        //when done reset pool active
+        //when done reset pool actives
         for (int i = 0; i < m_clickOnceCount - 1; i++)
         {
             m_clickOnceActive[i] = false;
         }
+
 
     }
 
@@ -145,10 +148,10 @@ public class SequenceManager : MonoBehaviour
     /// Make an array of game objects corresponding to a given sequence
     /// </summary>
     /// <returns></returns>
-    private GameObject[] MakeSequenceList(NoteType[] sequence)
+    private GameObject[] MakeSequenceList(NoteType[] sequence, int length)
     {
         GameObject[] noteArray = new GameObject[sequence.Length];
-        for (int i = 0; i < m_parentSequence.Length; i++)
+        for (int i = 0; i < length; i++)
         {
             switch (sequence[i])
             {

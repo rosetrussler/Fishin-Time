@@ -43,6 +43,7 @@ public class BobberMovement : MonoBehaviour
                 Debug.Log("Move: " + ctx.ReadValue<Vector2>());
                 m_moveDirection = ctx.ReadValue<Vector2>();
                 m_moveTimer = Time.time + m_moveCooldown;
+
             }
         }
 

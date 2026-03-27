@@ -6,6 +6,7 @@ public class ScoreManager : MonoBehaviour
 {
     private float m_playerScore;
     private float m_currentFishDifficulty;  //has to be in range 0 <= x < 1
+    private bool m_fishCaught;
 
     public event Action OnFishCaught;
 
@@ -22,6 +23,7 @@ public class ScoreManager : MonoBehaviour
 
     private void StartNewSequenceHandler(float fishDifficulty)
     {
+        m_fishCaught = false;
         m_playerScore = 0;
         m_currentFishDifficulty = fishDifficulty;
     }
@@ -30,9 +32,10 @@ public class ScoreManager : MonoBehaviour
     {
         m_playerScore += playerScore;
         Debug.Log("Player score: " + m_playerScore);
-        if (m_playerScore >= 1.0f)
+        if (m_playerScore >= 1.0f && m_fishCaught == false)
         {
             Debug.Log("FISH CAUGHT");
+            m_fishCaught = true;
             //call fish caught event to reset bobber state
             OnFishCaught?.Invoke();
         }

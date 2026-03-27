@@ -25,14 +25,6 @@ public class FishMovement : MonoBehaviour
         transform.position += m_fishMovementDirection * m_fishSpeed * Time.deltaTime;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("FishSink"))
-        {
-            HandleDespawn();
-        }
-    }
-
     public void HandleOnFishSpawn(Vector3 spawnPoint, Vector3 directionOfTravel)
     {
         Debug.Log("Spawn");
