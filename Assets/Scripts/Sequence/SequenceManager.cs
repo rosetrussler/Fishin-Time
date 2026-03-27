@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 [RequireComponent(typeof(ScoreManager))]
 public class SequenceManager : MonoBehaviour
 {
+    /// <summary>
+    /// The different tyoes of notes that can appear in a sequence
+    /// </summary>
     enum NoteType
     {
         rest,
@@ -25,13 +28,71 @@ public class SequenceManager : MonoBehaviour
     private bool[] m_clickOnceActive;
     private int m_clickOnceCount;
     private int m_clickOncePointerToNext;
+    private float m_fishDifficulty;
 
     [Header("Sequences"), Header("Parent Sequence")]
     [SerializeField] private NoteType[] m_parentSequence;
     [SerializeField] private Vector2[] m_parentSequenceNotePositions;
+    /// <summary>
+    /// A value between 0 - 1 that the player's timing score is multiplied by
+    /// </summary>
+    [SerializeField] private float m_parentDifficulty;
     [Header("Sea Bass Sequence")]
     [SerializeField] private NoteType[] m_seaBassSequence;
     [SerializeField] private Vector2[] m_seaBassSequenceNotePositions;
+    /// <summary>
+    /// A value between 0 - 1 that the player's timing score is multiplied by
+    /// </summary>
+    [SerializeField] private float m_seaBassDifficulty;
+    [Header("Angel Fish Sequence")]
+    [SerializeField] private NoteType[] m_angelFishSequence;
+    [SerializeField] private Vector2[] m_angelFishSequencePositions;
+    /// <summary>
+    /// A value between 0 - 1 that the player's timing score is multiplied by
+    /// </summary>
+    [SerializeField] private float m_angelFishDifficulty;
+    [Header("Sun Fish Sequence")]
+    [SerializeField] private NoteType[] m_sunFishSequence;
+    [SerializeField] private Vector2[] m_sunFishSequencePositions;
+    /// <summary>
+    /// A value between 0 - 1 that the player's timing score is multiplied by
+    /// </summary>
+    [SerializeField] private float m_sunFishDifficulty;
+    [Header("Cod Sequence")]
+    [SerializeField] private NoteType[] m_codSequence;
+    [SerializeField] private Vector2[] m_codSequencePositions;
+    /// <summary>
+    /// A value between 0 - 1 that the player's timing score is multiplied by
+    /// </summary>
+    [SerializeField] private float m_codDifficulty;
+    [Header("Eel Sequence")]
+    [SerializeField] private NoteType[] m_eelSequence;
+    [SerializeField] private Vector2[] m_eelSequencePositions;
+    /// <summary>
+    /// A value between 0 - 1 that the player's timing score is multiplied by
+    /// </summary>
+    [SerializeField] private float m_eelDifficulty;
+    [Header("Angler Fish Sequence")]
+    [SerializeField] private NoteType[] m_anglerFishSequence;
+    [SerializeField] private Vector2[] m_anglerFishSequencePositions;
+    /// <summary>
+    /// A value between 0 - 1 that the player's timing score is multiplied by
+    /// </summary>
+    [SerializeField] private float m_anglerFishDifficulty;
+    [Header("Haddock Sequence")]
+    [SerializeField] private NoteType[] m_haddockSequence;
+    [SerializeField] private Vector2[] m_haddockSequencePositions;
+    /// <summary>
+    /// A value between 0 - 1 that the player's timing score is multiplied by
+    /// </summary>
+    [SerializeField] private float m_haddockDifficulty;
+    [Header("Trout Sequence")]
+    [SerializeField] private NoteType[] m_troutSequence;
+    [SerializeField] private Vector2[] m_troutSequencePositions;
+    /// <summary>
+    /// A value between 0 - 1 that the player's timing score is multiplied by
+    /// </summary>
+    [SerializeField] private float m_troutDifficulty;
 
     private bool m_fishCaught = false;
 
@@ -64,14 +125,44 @@ public class SequenceManager : MonoBehaviour
     /// <param name="sequenceName"></param>
     public async void HandleOnStartSequence(SequenceType sequenceType, FishDetectCatch fishRef)
     {
-        switch(sequenceType)
+        //play sequence given by sequence type 
+        switch (sequenceType)    
         {
             case (SequenceType.parent):
+                m_fishDifficulty = m_parentDifficulty;
                 await PlaySequence(m_parentSequence, m_parentSequenceNotePositions, fishRef);
                 break;
             case (SequenceType.seaBass):
+                m_fishDifficulty = m_seaBassDifficulty;
                 await PlaySequence(m_seaBassSequence, m_seaBassSequenceNotePositions, fishRef);
-                Debug.Log("Sea Bass Hooked");
+                break;
+            case (SequenceType.angelFish):
+                m_fishDifficulty = m_angelFishDifficulty;
+                await PlaySequence(m_angelFishSequence, m_angelFishSequencePositions, fishRef);
+                break;
+            case (SequenceType.sunFish):
+                m_fishDifficulty = m_sunFishDifficulty;
+                await PlaySequence(m_sunFishSequence, m_sunFishSequencePositions, fishRef);
+                break;
+            case (SequenceType.cod):
+                m_fishDifficulty = m_codDifficulty;
+                await PlaySequence(m_codSequence, m_codSequencePositions, fishRef);
+                break;
+            case (SequenceType.eel):
+                m_fishDifficulty = m_eelDifficulty;
+                await PlaySequence(m_eelSequence, m_eelSequencePositions, fishRef);
+                break;
+            case (SequenceType.anglerFish):
+                m_fishDifficulty = m_anglerFishDifficulty;
+                await PlaySequence(m_anglerFishSequence, m_anglerFishSequencePositions, fishRef);
+                break;
+            case (SequenceType.haddock):
+                m_fishDifficulty = m_haddockDifficulty;
+                await PlaySequence(m_haddockSequence, m_haddockSequencePositions, fishRef);
+                break;
+            case (SequenceType.trout):
+                m_fishDifficulty = m_troutDifficulty;
+                await PlaySequence(m_troutSequence, m_troutSequencePositions, fishRef);
                 break;
             default:
                 Debug.Log("[!]ERROR: No valid sequence name passed to manager");
@@ -98,7 +189,8 @@ public class SequenceManager : MonoBehaviour
         }
 
         //tell score manager to start new sequence with current fish difficulty
-        OnStartNewSequence?.Invoke(0.0f);   //TO DO: pass in actual fish difficulty
+
+        OnStartNewSequence?.Invoke(m_fishDifficulty);   
 
         //start sequence 
         for (int i = 0; i < sequenceLength; i++)

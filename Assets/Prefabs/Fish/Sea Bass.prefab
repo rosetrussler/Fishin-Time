@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3580836371810561033}
   m_Layer: 3
   m_Name: Sea Bass
-  m_TagString: Untagged
+  m_TagString: Fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,8 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b39fb323c4bdcc54ba19d117a090fbe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_fishSpeed: 0
-  m_fishPoolLocation: {x: 0, y: 0, z: 0}
+  m_fishSpeed: 2
+  m_fishPoolLocation: {x: 20, y: 20, z: 0}
 --- !u!50 &3580836371810561033
 Rigidbody2D:
   serializedVersion: 5

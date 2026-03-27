@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2778420376910900175
+--- !u!1 &3619013315672962166
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,41 +8,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 432752020788202421}
-  - component: {fileID: 6611898305268700062}
-  - component: {fileID: 4435465148701683818}
-  - component: {fileID: 3676750190376961420}
-  - component: {fileID: 3718667283442521160}
-  - component: {fileID: 3580836371810561033}
+  - component: {fileID: 7815421672625119887}
+  - component: {fileID: 1044614246528797026}
+  - component: {fileID: 2322644276950978555}
+  - component: {fileID: 896735583730819830}
+  - component: {fileID: 6411190798388433635}
+  - component: {fileID: 3387662147777990146}
   m_Layer: 3
-  m_Name: Fish Parent
+  m_Name: Angler Fish
   m_TagString: Fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &432752020788202421
+--- !u!4 &7815421672625119887
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2778420376910900175}
+  m_GameObject: {fileID: 3619013315672962166}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -16.55, y: 3.17, z: 0}
+  m_LocalPosition: {x: 14.02, y: 4.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!212 &6611898305268700062
+--- !u!212 &1044614246528797026
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2778420376910900175}
+  m_GameObject: {fileID: 3619013315672962166}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 0.2653524, g: 0.8396226, b: 0.27233106, a: 1}
+  m_Color: {r: 0.5377358, g: 0.43489674, b: 0.32720718, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -91,13 +91,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &4435465148701683818
+--- !u!70 &2322644276950978555
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2778420376910900175}
+  m_GameObject: {fileID: 3619013315672962166}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -128,26 +128,26 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.0000002, y: 2.0000005}
   m_Direction: 0
---- !u!114 &3676750190376961420
+--- !u!114 &896735583730819830
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2778420376910900175}
+  m_GameObject: {fileID: 3619013315672962166}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c627a58d90c94c44aba14572447d2e29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_fishSequence: 0
---- !u!114 &3718667283442521160
+  m_fishSequence: 4
+--- !u!114 &6411190798388433635
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2778420376910900175}
+  m_GameObject: {fileID: 3619013315672962166}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b39fb323c4bdcc54ba19d117a090fbe6, type: 3}
@@ -155,14 +155,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_fishSpeed: 1
   m_fishPoolLocation: {x: 20, y: 20, z: 0}
---- !u!50 &3580836371810561033
+--- !u!50 &3387662147777990146
 Rigidbody2D:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2778420376910900175}
+  m_GameObject: {fileID: 3619013315672962166}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0

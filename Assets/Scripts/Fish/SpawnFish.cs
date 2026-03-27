@@ -51,6 +51,7 @@ public class SpawnFish : MonoBehaviour
     /// </summary>
     private void SpawnRandomFish()
     {
+        Debug.Log("SpawnFish");
         bool validSpawn = false;
         while (!validSpawn)
         {

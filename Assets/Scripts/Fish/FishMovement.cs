@@ -75,7 +75,11 @@ public class FishMovement : MonoBehaviour
     private void OnDestroy()
     {
         //unsubscribe to events
-        transform.parent.GetComponent<FishDetectCatch>().OnFishCaught -= HandleOnFishCaught;
+        if (GetComponent<FishDetectCatch>() != null)
+        {
+            GetComponent<FishDetectCatch>().OnFishCaught -= HandleOnFishCaught;
+        }
+
     }
 
 }

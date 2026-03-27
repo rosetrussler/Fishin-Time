@@ -7,6 +7,13 @@ public class FishDetectCatch : MonoBehaviour
     {
         parent, 
         seaBass,
+        trout,
+        haddock,
+        anglerFish,
+        eel,
+        cod,
+        sunFish,
+        angelFish
     }
 
     [SerializeField] private SequenceType m_fishSequence;

@@ -30,7 +30,7 @@ public class ScoreManager : MonoBehaviour
 
     public void ScoreChangeHandler(float playerScore)
     {
-        m_playerScore += playerScore;
+        m_playerScore += (playerScore * m_currentFishDifficulty);
         Debug.Log("Player score: " + m_playerScore);
         if (m_playerScore >= 1.0f && m_fishCaught == false)
         {
